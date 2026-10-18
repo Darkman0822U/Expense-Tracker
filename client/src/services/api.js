@@ -1,4 +1,5 @@
-const API_BASE_URL = '/api/expenses';
+const API_ORIGIN = (process.env.REACT_APP_API_URL || '').replace(/\/+$/, '');
+const API_BASE_URL = `${API_ORIGIN}/api/expenses`;
 
 async function request(path = '', options = {}) {
   const response = await fetch(`${API_BASE_URL}${path}`, {
@@ -25,7 +26,13 @@ async function request(path = '', options = {}) {
 }
 
 export function getExpenses() {
-  return request();
+  return request().then((data) => {
+    if (!Array.isArray(data)) {
+      throw new Error('The API returned an invalid expenses response.');
+    }
+
+    return data;
+  });
 }
 
 export function createExpense(expenseData) {

@@ -65,6 +65,13 @@ MONGO_URI=mongodb://127.0.0.1:27017/expense_tracker
 
 If you use MongoDB Atlas, replace `MONGO_URI` with your Atlas connection string.
 
+For production deployments where the frontend and backend have separate URLs, set
+`REACT_APP_API_URL` in the frontend's build environment to the backend origin
+(for example, `https://your-backend.example.com`). The client appends
+`/api/expenses` automatically. Rebuild and redeploy the frontend after changing
+this variable. If both services share a domain and `/api` is routed to the
+backend, this variable can be omitted.
+
 ## How to Run
 
 Open two terminals:
