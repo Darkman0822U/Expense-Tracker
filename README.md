@@ -72,12 +72,10 @@ For production deployments where the frontend and backend have separate URLs, se
 this variable. Do not include `/api/expenses` in its value. If both services
 share a domain and `/api` is routed to the backend, this variable can be omitted.
 
-Set `CLIENT_ORIGIN` in the backend's environment to the exact deployed frontend
-origin (for example, `https://your-frontend.example.com`). The server defaults
-to `http://localhost:3000` for local development. Configure CORS in only one
-place: if the hosting platform adds `Access-Control-Allow-Origin` itself,
-disable that platform-level header so it does not conflict with the server's
-CORS response.
+Acadsites adds `Access-Control-Allow-Origin: *` to backend responses. The
+backend's CORS middleware handles preflight requests without adding another
+origin header, avoiding a duplicate-header error. `CLIENT_ORIGIN` is not needed
+on Acadsites. For other hosting providers, configure CORS in only one place.
 
 ## How to Run
 

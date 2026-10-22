@@ -9,9 +9,10 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/expense_tracker';
-const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || 'http://localhost:3000';
 
-app.use(cors({ origin: CLIENT_ORIGIN }));
+// Acadsites adds Access-Control-Allow-Origin: *; handle preflight without
+// adding a second Access-Control-Allow-Origin header.
+app.use(cors({ origin: false }));
 app.use(express.json());
 
 // API routes for expenses
