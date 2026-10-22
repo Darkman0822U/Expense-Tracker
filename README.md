@@ -69,8 +69,15 @@ For production deployments where the frontend and backend have separate URLs, se
 `REACT_APP_API_URL` in the frontend's build environment to the backend origin
 (for example, `https://your-backend.example.com`). The client appends
 `/api/expenses` automatically. Rebuild and redeploy the frontend after changing
-this variable. If both services share a domain and `/api` is routed to the
-backend, this variable can be omitted.
+this variable. Do not include `/api/expenses` in its value. If both services
+share a domain and `/api` is routed to the backend, this variable can be omitted.
+
+Set `CLIENT_ORIGIN` in the backend's environment to the exact deployed frontend
+origin (for example, `https://your-frontend.example.com`). The server defaults
+to `http://localhost:3000` for local development. Configure CORS in only one
+place: if the hosting platform adds `Access-Control-Allow-Origin` itself,
+disable that platform-level header so it does not conflict with the server's
+CORS response.
 
 ## How to Run
 
